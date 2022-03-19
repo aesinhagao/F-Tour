@@ -5,14 +5,14 @@ canvas.width = screen.width
 canvas.height = screen.height
 
 const collisionsMap = []
-for (let i = 0; i < collisions.length; i += 337) {
-  collisionsMap.push(collisions.slice(i, 337 + i))
+for (let i = 0; i < collisions.length; i += 378) {
+  collisionsMap.push(collisions.slice(i, 378 + i))
 }
 
 const boundaries = []
 const offset = {
-  x: -6972,
-  y: -5800
+  x: -8290,
+  y: -7900
 }
 
 collisionsMap.forEach((row, i) => {
