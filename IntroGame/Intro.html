@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <!-- Content Type Meta tag -->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -17,27 +16,28 @@
     <link href="https://fonts.googleapis.com/css?family=Coda" rel="stylesheet">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="intro.css">
 
     <link href="http://fonts.cdnfonts.com/css/proggy-clean" rel="stylesheet">
-                
+
 
 </head>
 
 <body>
-
     <header>
         <h1> FPT Number One </h1>
         <p>Play a game of true or false</p>
         <button onclick="catAndQuest()" id="start"> START </button>
-        
+
     </header>
 
-    
+
     <div class="container">
         <div id="questions">
             <div id="count"></div>
-            <div id="category"></span> </div>
+            <div id="category">
+                </span>
+            </div>
             <div id="quest"> </div>
             <button onclick="answer(true)" style="display:none;" id="answerT"> TRUE</button>
             <button onclick="answer(false)" style="display:none;" id="answerF"> FALSE</button>
@@ -46,17 +46,15 @@
         <div id="winner" style="display:none;">YOU WIN! <br>Congratulations on getting 10 points!</div>
         <div id="looser" style="display:none;">Sorry,You must learn again!.<br> You loose!</div>
         <button onclick="restart()" style="display:none;" id="reset"> PLAY AGAIN? </button>
-        <button onclick="closeWin()"style="display:none;" id="exit">Exit</button>
-        <button onclick="closeWin()"style="display:none;" id="exit1">Exit</button>
+        <button onclick="closeWin()" style="display:none;" id="exit">Exit</button>
+        <button onclick="closeWin()" style="display:none;" id="exit1">Exit</button>
     </div>
 
-
-
     <!-- JavaScript -->
-    <script src="js/main.js"></script>
+    <script src="intro.js"></script>
     <audio id="sound" autoplay loop controls style="margin-left: 40%;"> 
         <source src="sound.mp3" type="audio/mpeg">
-    </audio>    
+    </audio>
 </body>
 
 </html>

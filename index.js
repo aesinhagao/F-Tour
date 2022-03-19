@@ -5,14 +5,14 @@ canvas.width = screen.width
 canvas.height = screen.height
 
 const collisionsMap = []
-for (let i = 0; i < collisions.length; i += 337) {
-    collisionsMap.push(collisions.slice(i, 337 + i))
+for (let i = 0; i < collisions.length; i += 378) {
+    collisionsMap.push(collisions.slice(i, 378 + i))
 }
 
 const boundaries = []
 const offset = {
-    x: -6972,
-    y: -5800
+    x: -8290,
+    y: -7900
 }
 
 collisionsMap.forEach((row, i) => {
@@ -118,12 +118,12 @@ function animate() {
     if (battle.initiated) return
 
     console.log(movables[0].position.x, movables[0].position.y);
-    if (movables[0].position.x == -7092 && movables[0].position.y == -4999) {
-        window.open("rules.html", "_blank");
+    if (movables[0].position.x == -8380 && movables[0].position.y == -6919) {
+        window.open("/IntroGame/Intro.html", "_blank");
     }
 
-    if (movables[0].position.x == -7092 && movables[0].position.y == -4999) {
-        window.open("rules.html", "_blank");
+    if (movables[0].position.x >= -6960 && movables[0].position.x <= -6950 && movables[0].position.y <= -4770 && movables[0].position.y >= -4780) {
+        window.open("/RulesGame/rules.html", "_blank");
     }
 
     if (keys.w.pressed && lastKey === 'w') {
