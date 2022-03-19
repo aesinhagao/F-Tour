@@ -5,13 +5,13 @@ canvas.width = screen.width
 canvas.height = screen.height
 
 const collisionsMap = []
-for (let i = 0; i < collisions.length; i += 335) {
-  collisionsMap.push(collisions.slice(i, 335 + i))
+for (let i = 0; i < collisions.length; i += 337) {
+  collisionsMap.push(collisions.slice(i, 337 + i))
 }
 
 const battleZonesMap = []
-for (let i = 0; i < battleZonesData.length; i += 335) {
-  battleZonesMap.push(battleZonesData.slice(i, 335 + i))
+for (let i = 0; i < battleZonesData.length; i += 337) {
+  battleZonesMap.push(battleZonesData.slice(i, 337 + i))
 }
 
 const boundaries = []
