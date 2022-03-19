@@ -5,13 +5,8 @@ canvas.width = screen.width
 canvas.height = screen.height
 
 const collisionsMap = []
-for (let i = 0; i < collisions.length; i += 378) {
-  collisionsMap.push(collisions.slice(i, 378 + i))
-}
-
-const battleZonesMap = []
-for (let i = 0; i < battleZonesData.length; i += 378) {
-  battleZonesMap.push(battleZonesData.slice(i, 378 + i))
+for (let i = 0; i < collisions.length; i += 337) {
+  collisionsMap.push(collisions.slice(i, 337 + i))
 }
 
 const boundaries = []
@@ -34,27 +29,10 @@ collisionsMap.forEach((row, i) => {
   })
 })
 
-const battleZones = []
-
-battleZonesMap.forEach((row, i) => {
-  row.forEach((symbol, j) => {
-    if (symbol === 18641)
-      battleZones.push(
-        new Boundary({
-          position: {
-            x: j * Boundary.width + offset.x,
-            y: i * Boundary.height + offset.y
-          }
-        })
-      )
-  })
-})
 
 const image = new Image()
 image.src = './img/FPT.png'
 
-const foregroundImage = new Image()
-foregroundImage.src = './img/foregroundObjects.png'
 
 const playerDownImage = new Image()
 playerDownImage.src = './img/playerDown.png'
@@ -94,13 +72,7 @@ const background = new Sprite({
   image: image
 })
 
-const foreground = new Sprite({
-  position: {
-    x: offset.x,
-    y: offset.y
-  },
-  image: foregroundImage
-})
+
 
 const keys = {
   w: {
@@ -117,7 +89,7 @@ const keys = {
   }
 }
 
-const movables = [background, ...boundaries, foreground, ...battleZones]
+const movables = [background, ...boundaries]
 
 function rectangularCollision({ rectangle1, rectangle2 }) {
   return (
@@ -138,73 +110,13 @@ function animate() {
   boundaries.forEach((boundary) => {
     boundary.draw()
   })
-  battleZones.forEach((battleZone) => {
-    battleZone.draw()
-  })
   player.draw()
-  foreground.draw()
 
   let moving = true
   player.animate = false
 
   if (battle.initiated) return
 
-  // activate a battle
-  if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed) {
-    for (let i = 0; i < battleZones.length; i++) {
-      const battleZone = battleZones[i]
-      const overlappingArea =
-        (Math.min(
-          player.position.x + player.width,
-          battleZone.position.x + battleZone.width
-        ) -
-          Math.max(player.position.x, battleZone.position.x)) *
-        (Math.min(
-          player.position.y + player.height,
-          battleZone.position.y + battleZone.height
-        ) -
-          Math.max(player.position.y, battleZone.position.y))
-      if (
-        rectangularCollision({
-          rectangle1: player,
-          rectangle2: battleZone
-        }) &&
-        overlappingArea > (player.width * player.height) / 2 &&
-        Math.random() < 0.01
-      ) {
-        // deactivate current animation loop
-        window.cancelAnimationFrame(animationId)
-
-        audio.Map.stop()
-        audio.initBattle.play()
-        audio.battle.play()
-
-        battle.initiated = true
-        gsap.to('#overlappingDiv', {
-          opacity: 1,
-          repeat: 3,
-          yoyo: true,
-          duration: 0.4,
-          onComplete() {
-            gsap.to('#overlappingDiv', {
-              opacity: 1,
-              duration: 0.4,
-              onComplete() {
-                // activate a new animation loop
-                initBattle()
-                animateBattle()
-                gsap.to('#overlappingDiv', {
-                  opacity: 0,
-                  duration: 0.4
-                })
-              }
-            })
-          }
-        })
-        break
-      }
-    }
-  }
 
   if (keys.w.pressed && lastKey === 'w') {
     player.animate = true
@@ -316,7 +228,7 @@ function animate() {
       })
   }
 }
-// animate()
+
 
 let lastKey = ''
 window.addEventListener('keydown', (e) => {
@@ -358,7 +270,7 @@ window.addEventListener('keyup', (e) => {
       break
   }
 })
-
+animate()
 let clicked = false
 addEventListener('click', () => {
   if (!clicked) {
