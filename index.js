@@ -33,6 +33,8 @@ collisionsMap.forEach((row, i) => {
 const image = new Image()
 image.src = './img/FPT.png'
 
+const foregroundImage = new Image()
+foregroundImage.src = './img/foregroundObjects.png'
 
 const playerDownImage = new Image()
 playerDownImage.src = './img/playerDown.png'
@@ -72,6 +74,14 @@ const background = new Sprite({
     image: image
 })
 
+const foreground = new Sprite({
+  position: {
+    x: offset.x,
+    y: offset.y
+  },
+  image: foregroundImage
+})
+
 
 
 const keys = {
@@ -89,7 +99,7 @@ const keys = {
     }
 }
 
-const movables = [background, ...boundaries]
+const movables = [background, ...boundaries,foreground]
 
 function rectangularCollision({ rectangle1, rectangle2 }) {
     return (
@@ -107,11 +117,11 @@ function animate() {
         boundary.draw()
     })
     player.draw()
+    foreground.draw()
 
     let moving = true
     player.animate = false
 
-    console.log(movables[0].position.x, movables[0].position.y);
     if (movables[0].position.x == -8380 && movables[0].position.y == -6919) {
         window.open("/IntroGame/Intro.html", "_blank");
     }
@@ -232,7 +242,34 @@ function animate() {
             movables.forEach((movable) => {
                 movable.position.x -= 3
             })
-    }
+    } else if (keys.d.pressed && lastKey === 'd') {
+      player.animate = true
+      player.image = player.sprites.right
+
+      for (let i = 0; i < boundaries.length; i++) {
+          const boundary = boundaries[i]
+          if (
+              rectangularCollision({
+                  rectangle1: player,
+                  rectangle2: {
+                      ...boundary,
+                      position: {
+                          x: boundary.position.x - 3,
+                          y: boundary.position.y
+                      }
+                  }
+              })
+          ) {
+              moving = false
+              break
+          }
+      }
+
+      if (moving)
+          movables.forEach((movable) => {
+              movable.position.x -= 3
+          })
+  }
 }
 
 let lastKey = ''
