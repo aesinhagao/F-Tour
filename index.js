@@ -122,15 +122,15 @@ function animate() {
     let moving = true
     player.animate = false
 
-    if (movables[0].position.x == -8380 && movables[0].position.y == -6919) {
+    if (movables[0].position.x == -8101 && movables[0].position.y == -7015) {
         window.open("/IntroGame/Intro.html", "_blank");
     }
 
-    if (movables[0].position.x >= -6960 && movables[0].position.x <= -6950 && movables[0].position.y <= -4770 && movables[0].position.y >= -4780) {
+    if (movables[0].position.x == -7015 && movables[0].position.y == -4807) {
         window.open("/RulesGame/rules.html", "_blank");
     }
 
-    if (movables[0].position.x >= -3900 && movables[0].position.x <= -3890 && movables[0].position.y <= -2530 && movables[0].position.y >= -2540) {
+    if (movables[0].position.x == -3913 &&  movables[0].position.y == -2536) {
         window.open("/MemoryGame/memory.html", "_blank");
     }
 

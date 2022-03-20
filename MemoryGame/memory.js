@@ -161,6 +161,7 @@ const flipCard = card => {
                     with <span class="highlight">${state.totalFlips}</span> moves<br />
                     under <span class="highlight">${state.totalTime}</span> seconds
                 </span>
+                <button class="reload" type="button" onclick="window.location.reload();">Try again</button>
             `
 
       clearInterval(state.loop)
