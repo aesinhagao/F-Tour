@@ -13,6 +13,7 @@ const state = {
     totalFlips: 0,
     totalTime: 0,
     loop: null,
+    boardSize: 8,
 }
 
 const shuffle = array => {
@@ -44,12 +45,6 @@ const pickRandom = (array, items) => {
 }
 
 const generateGame = () => {
-        const dimensions = selectors.board.getAttribute('data-dimension')
-
-        if (dimensions % 2 !== 0) {
-            throw new Error('The dimension of the board must be an even number.')
-        }
-
         const emojis = [{
                 name: 't-shirt',
                 img: '<img src="https://img.icons8.com/doodle/48/000000/t-shirt--v1.png"/>'
@@ -83,11 +78,11 @@ const generateGame = () => {
                 img: '<img src="https://img.icons8.com/emoji/60/000000/woman-lifting-weights.png"/>',
             }
         ]
-        const picks = pickRandom(emojis, (dimensions * dimensions) / 2)
+        const picks = pickRandom(emojis, state.boardSize)
         const items = shuffle([...picks, ...picks])
 
         const cards = `
-        <div class="board" style="grid-template-columns: repeat(${dimensions}, auto)">
+        <div class="board">
             ${items.map(item => `
                 <div class="card" data-name="${item.name}">
                     <div class="card-front"></div>
@@ -95,7 +90,7 @@ const generateGame = () => {
                 </div>
             `).join('')}
        </div>
-    `
+      `
 
   const parser = new DOMParser().parseFromString(cards, 'text/html')
 
@@ -173,7 +168,7 @@ const attachEventListeners = () => {
   document.addEventListener('click', event => {
     const eventTarget = event.target
     const eventParent = eventTarget.parentElement
-
+    console.log(eventTarget, eventParent);
     if (eventTarget.className.includes('card') && !eventParent.className.includes('flipped')) {
       flipCard(eventParent)
     } else if (eventTarget.nodeName === 'BUTTON' && !eventTarget.className.includes('disabled')) {
