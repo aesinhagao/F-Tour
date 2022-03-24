@@ -1,3 +1,6 @@
+sessionStorage.setItem("currentX", -7015);
+sessionStorage.setItem("currentY", -4807);
+
 // Nội quy Game
 function Question(text, choices, answer) {
     this.text = text;
@@ -77,15 +80,15 @@ var QuizUI = {
             results += 'Terrible!';
         }
         results += '</h2><h3>Your score is: ' + quiz.score + '</h3>';
-        results += '<button id="reset">Exit Game</button>';
+        results += '<button id="exit">Exit Game</button>';
         this.populateIdWithHTML('quiz', results);
-        this.resetQuizHandler();
+        this.exitQuizHandler();
     },
-    resetQuizHandler: function() {
-        var resetBtn = document.getElementById('reset');
+    exitQuizHandler: function() {
+        var exitBtn = document.getElementById('exit');
         // Reload quiz to start from beginning
-        resetBtn.onclick = function() {
-            window.close();
+        exitBtn.onclick = function() {
+            window.open("../index.html", "_self");
         }
     },
     populateIdWithHTML: function(id, content) {

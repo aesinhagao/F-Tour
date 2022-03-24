@@ -1,0 +1,22 @@
+body {
+    background-color: black;
+}
+
+.mini{
+    position: fixed; 
+    bottom: 0;
+    right: 0;
+    width: 200px;
+    height: 200px;
+    background-image: url('./img/FPT.png');
+    opacity: 0.9;
+    border-radius: 10%;
+}
+
+.mini:hover {
+    -ms-transform: scale(1.5);
+    -webkit-transform: scale(1.5); 
+    transform: scale(2.0); 
+    bottom: 60;
+    right: 80;
+  }
