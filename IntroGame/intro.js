@@ -1,6 +1,8 @@
+sessionStorage.setItem("currentX", -8101);
+sessionStorage.setItem("currentY", -7015);
 var currentCategory = ['history', 'language', 'nature', 'technology'];
+
 var Questions = [
-    // store answer with questions for easier retrieval
     { category: 'history', question: 'FPT University was established on September 8, 2006 right?', answer: true },
     { category: 'history', question: 'FPT University is located at Land Hoa Lac, Km29 Highway 08, Thach Hoa, Thach That, Hanoi 10000 right?', answer: true },
     { category: 'history', question: 'The first rector of FPT University was Dr. Nguyen Khac Thanh right?', answer: false },
@@ -20,19 +22,16 @@ var Questions = [
 
 ];
 
-// when declared over here other functions will see it; it's not best practice to register them in global/window scope, but better than nothing ;)
 var count = 0;
 var points = 0;
 var category;
 var question;
 
-//show answer buttons only after clicking start button
 function showButtons() {
     document.getElementById('answerT').style.display = "";
     document.getElementById('answerF').style.display = "";
 }
 
-// choose a category and a question
 function catAndQuest() {
     ++count;
     start.style.display = 'none';
@@ -56,16 +55,10 @@ function catAndQuest() {
         document.getElementById('quest').innerHTML = question.question;
     }
     // document.getElementById('count').innerHTML = 'Question ' + (++count) + ' \/ 10';
-
-
-
-
 }
 
-// create a copy of Questions array
 var copy = [].concat(Questions);
 
-// delete used question out of the copy array
 function deleteUsed() {
     if (Questions.length > 0) {
         Questions.splice(Questions.indexOf(question), 1);
@@ -79,7 +72,6 @@ function deleteUsed() {
     }
 }
 
-//user answered question
 function answer(value) {
     deleteUsed();
     if (value === question.answer) {
@@ -98,10 +90,9 @@ function answer(value) {
 }
 
 function closeWin() {
-    close();
+    window.open("../index.html", "_self");
 }
 
-//restart the game
 function restart() {
     document.location.href = "";
 }

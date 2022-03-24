@@ -1,87 +1,89 @@
+sessionStorage.setItem("currentX", -3913);
+sessionStorage.setItem("currentY", -2536);
+
 const selectors = {
-    boardContainer: document.querySelector('.board-container'),
-    board: document.querySelector('.board'),
-    moves: document.querySelector('.moves'),
-    timer: document.querySelector('.timer'),
-    start: document.querySelector('button'),
-    win: document.querySelector('.win'),
+  boardContainer: document.querySelector('.board-container'),
+  board: document.querySelector('.board'),
+  moves: document.querySelector('.moves'),
+  timer: document.querySelector('.timer'),
+  win: document.querySelector('.win'),
 }
 
 const state = {
-    gameStarted: false,
-    flippedCards: 0,
-    totalFlips: 0,
-    totalTime: 0,
-    loop: null,
-    boardSize: 8,
+  gameStarted: false,
+  flippedCards: 0,
+  totalFlips: 0,
+  totalTime: 0,
+  loop: null,
+  boardSize: 8,
 }
 
 const shuffle = array => {
-    const clonedArray = [...array]
+  const clonedArray = [...array]
 
-    for (let index = clonedArray.length - 1; index > 0; index--) {
-        const randomIndex = Math.floor(Math.random() * (index + 1))
+  for (let index = clonedArray.length - 1; index > 0; index--) {
+    const randomIndex = Math.floor(Math.random() * (index + 1))
 
-        const original = clonedArray[index]
-        clonedArray[index] = clonedArray[randomIndex]
-        clonedArray[randomIndex] = original
-    }
+    const original = clonedArray[index]
+    clonedArray[index] = clonedArray[randomIndex]
+    clonedArray[randomIndex] = original
+  }
 
-    return clonedArray
+  return clonedArray
 }
 
 const pickRandom = (array, items) => {
-    const clonedArray = [...array]
-    const randomPicks = []
+  const clonedArray = [...array]
+  const randomPicks = []
 
-    for (let index = 0; index < items; index++) {
-        const randomIndex = Math.floor(Math.random() * clonedArray.length)
+  for (let index = 0; index < items; index++) {
+    const randomIndex = Math.floor(Math.random() * clonedArray.length)
 
-        randomPicks.push(clonedArray[randomIndex])
-        clonedArray.splice(randomIndex, 1)
-    }
+    randomPicks.push(clonedArray[randomIndex])
+    clonedArray.splice(randomIndex, 1)
+  }
 
-    return randomPicks
+  return randomPicks
 }
 
 const generateGame = () => {
-        const emojis = [{
-                name: 't-shirt',
-                img: '<img src="https://img.icons8.com/doodle/48/000000/t-shirt--v1.png"/>'
-            },
-            {
-                name: 'lotus',
-                img: '<img src="https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/60/000000/external-lotus-diwali-vitaliy-gorbachev-lineal-color-vitaly-gorbachev.png"/>'
-            },
-            {
-                name: 'goose',
-                img: '<img src="https://img.icons8.com/external-icongeek26-flat-icongeek26/64/000000/external-goose-birds-icongeek26-flat-icongeek26.png"/>',
-            },
-            {
-                name: 'frog',
-                img: '<img src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/000000/external-frog-animal-flaticons-lineal-color-flat-icons.png"/>',
-            },
-            {
-                name: 'mango',
-                img: '<img src="https://img.icons8.com/external-tulpahn-outline-color-tulpahn/64/000000/external-mango-fruit-tulpahn-outline-color-tulpahn.png"/>',
-            },
-            {
-                name: 'money',
-                img: '<img src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/000000/external-money-casino-flaticons-lineal-color-flat-icons-8.png"/>',
-            },
-            {
-                name: 'uniform',
-                img: '<img src="https://img.icons8.com/emoji/48/000000/martial-arts-uniform-emoji.png"/>',
-            },
-            {
-                name: 'woman',
-                img: '<img src="https://img.icons8.com/emoji/60/000000/woman-lifting-weights.png"/>',
-            }
-        ]
-        const picks = pickRandom(emojis, state.boardSize)
-        const items = shuffle([...picks, ...picks])
+  const emojis = [{
+    name: 't-shirt',
+    img: '<img src="https://img.icons8.com/doodle/48/000000/t-shirt--v1.png"/>'
+  },
+  {
+    name: 'lotus',
+    img: '<img src="https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/60/000000/external-lotus-diwali-vitaliy-gorbachev-lineal-color-vitaly-gorbachev.png"/>'
+  },
+  {
+    name: 'goose',
+    img: '<img src="https://img.icons8.com/external-icongeek26-flat-icongeek26/64/000000/external-goose-birds-icongeek26-flat-icongeek26.png"/>',
+  },
+  {
+    name: 'frog',
+    img: '<img src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/000000/external-frog-animal-flaticons-lineal-color-flat-icons.png"/>',
+  },
+  {
+    name: 'mango',
+    img: '<img src="https://img.icons8.com/external-tulpahn-outline-color-tulpahn/64/000000/external-mango-fruit-tulpahn-outline-color-tulpahn.png"/>',
+  },
+  {
+    name: 'money',
+    img: '<img src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/000000/external-money-casino-flaticons-lineal-color-flat-icons-8.png"/>',
+  },
+  {
+    name: 'uniform',
+    img: '<img src="https://img.icons8.com/emoji/48/000000/martial-arts-uniform-emoji.png"/>',
+  },
+  {
+    name: 'woman',
+    img: '<img src="https://img.icons8.com/emoji/60/000000/woman-lifting-weights.png"/>',
+  }
+  ]
+  const picks = pickRandom(emojis, state.boardSize)
+  const items = shuffle([...picks, ...picks])
 
-        const cards = `
+  const cards = `
         <div class="board">
             ${items.map(item => `
                 <div class="card" data-name="${item.name}">
@@ -97,18 +99,13 @@ const generateGame = () => {
   selectors.board.replaceWith(parser.querySelector('.board'))
 }
 
-const startGame = () => {
+const setTime = () => {
   state.gameStarted = true
-  selectors.start.classList.add('disabled')
-
   state.loop = setInterval(() => {
     state.totalTime++
-
     selectors.moves.innerText = `${state.totalFlips} moves`
     selectors.timer.innerText = `time: ${state.totalTime} sec`
   }, 1000)
-
-  console.log(document.getElementsByClassName('card-back')[0].innerText)
 }
 
 const flipBackCards = () => {
@@ -124,7 +121,7 @@ const flipCard = card => {
   state.totalFlips++
 
   if (!state.gameStarted) {
-    startGame()
+    setTime()
   }
 
   if (state.flippedCards <= 2) {
@@ -171,8 +168,6 @@ const attachEventListeners = () => {
     console.log(eventTarget, eventParent);
     if (eventTarget.className.includes('card') && !eventParent.className.includes('flipped')) {
       flipCard(eventParent)
-    } else if (eventTarget.nodeName === 'BUTTON' && !eventTarget.className.includes('disabled')) {
-      startGame()
     }
   })
 }
