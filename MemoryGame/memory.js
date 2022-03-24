@@ -84,19 +84,16 @@ const generateGame = () => {
   const items = shuffle([...picks, ...picks])
 
   const cards = `
-        <div class="board">
             ${items.map(item => `
                 <div class="card" data-name="${item.name}">
                     <div class="card-front"></div>
                     <div class="card-back">${item.img}</div>
                 </div>
             `).join('')}
-       </div>
       `
-
-  const parser = new DOMParser().parseFromString(cards, 'text/html')
-
-  selectors.board.replaceWith(parser.querySelector('.board'))
+  document.querySelector('.board').innerHTML = cards
+  // const parser = new DOMParser().parseFromString(cards, 'text/html')
+  // selectors.board.replaceWith(parser.querySelector('.board'))
 }
 
 const setTime = () => {
@@ -130,8 +127,8 @@ const flipCard = card => {
 
   if (state.flippedCards === 2) {
     const flippedCards = document.querySelectorAll('.flipped:not(.matched)')
-
-    console.log(flippedCards[0], flippedCards[1].getAttribute('data-name'))
+    console.log(flippedCards);
+    console.log(flippedCards[0].getAttribute('data-name'), flippedCards[1].getAttribute('data-name'))
 
     if (flippedCards[0].getAttribute('data-name') === flippedCards[1].getAttribute('data-name')) {
       flippedCards[0].classList.add('matched')
@@ -165,8 +162,8 @@ const attachEventListeners = () => {
   document.addEventListener('click', event => {
     const eventTarget = event.target
     const eventParent = eventTarget.parentElement
-    console.log(eventTarget, eventParent);
-    if (eventTarget.className.includes('card') && !eventParent.className.includes('flipped')) {
+    // console.log(eventTarget, eventParent);
+    if (eventTarget.className.includes('card-front') && !eventParent.className.includes('flipped')) {
       flipCard(eventParent)
     }
   })
