@@ -320,3 +320,7 @@ addEventListener('click', () => {
         clicked = true
     }
 })
+function handleStartClick() {
+  document.getElementById('welcome').setAttribute('style', 'display: none')
+  isStart = true
+}
