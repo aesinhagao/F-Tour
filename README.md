@@ -13,7 +13,7 @@
 |2|Đặng Vũ Hoàng Trung|trungdang249@gmail.com|Back-end dev, Tester|
 |3|Lương Quốc Cường|cuonglq@gmail.com|Back-end dev|
 |4|Đỗ Minh Vũ|vudm@gmail.com|Back-end dev|
-|5|Nguyễn Công Anh|conganhnguyen33@gmail.com|Design|
+|5|Nguyễn Công Anh|conganhnguyen33@gmail.com|Front-end, Design|
 
 ## Setup
 
