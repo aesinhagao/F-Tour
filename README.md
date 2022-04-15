@@ -9,7 +9,7 @@
 
 |Rol|Name|Email|Task|
 |:---:|---|---|---|
-|1|Đặng Văn Tuân|admin@nmtung.xyz|Back-end dev|
+|1|Đặng Văn Tuân|tuandv@gmail.com|Back-end dev|
 |2|Đặng Vũ Hoàng Trung|trungdang249@gmail.com|Back-end dev, Tester|
 |3|Lương Quốc Cường|cuonglq@gmail.com|Back-end dev|
 |4|Đỗ Minh Vũ|vudm@gmail.com|Back-end dev|
